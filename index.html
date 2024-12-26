@@ -8,8 +8,18 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header class="header">
+        <div class="logo">
+            <h1 class="app-title">Weather Dashboard</h1>
+        </div>
+        <nav class="nav">
+            <a href="login.html" class="nav-link">Login</a>
+            <a href="signup.html" class="nav-link">Sign Up</a>
+        </nav>
+    </header>
+
     <div class="weather-container">
-        <h1 class="app-title">Weather Dashboard</h1>
+        <h1 class="app-title">Check Your Weather</h1>
         <form id="weather-form" class="form-container">
             <input type="text" id="location" placeholder="Enter a city name" required>
             <button type="submit" class="btn-primary">Get Weather</button>
@@ -32,6 +42,10 @@
 
         <div id="error-message" class="error-message hidden">City not found. Please try again.</div>
     </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Weather Dashboard. All rights reserved.</p>
+    </footer>
 
     <script src="app.js"></script>
 </body>
