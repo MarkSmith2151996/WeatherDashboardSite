@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="weather-container">
+        <h1 class="app-title">Weather Dashboard</h1>
+        <form id="weather-form" class="form-container">
+            <input type="text" id="location" placeholder="Enter a city name" required>
+            <button type="submit" class="btn-primary">Get Weather</button>
+        </form>
+        
+        <div class="weather-display hidden">
+            <h2 id="city-name" class="city-name">New York</h2>
+            <div class="weather-info">
+                <div class="weather-icon">
+                    <img id="condition-icon" src="images/partly-cloudy.png" alt="Weather Condition Icon">
+                </div>
+                <div id="weather-details" class="details-container">
+                    <p id="temperature" class="weather-detail">Temperature: 22°C</p>
+                    <p id="humidity" class="weather-detail">Humidity: 75%</p>
+                    <p id="wind-speed" class="weather-detail">Wind Speed: 15 km/h</p>
+                    <p id="weather-description" class="weather-detail">Condition: Partly Cloudy</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="error-message" class="error-message hidden">City not found. Please try again.</div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
