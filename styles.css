@@ -9,75 +9,123 @@ body {
     background: linear-gradient(135deg, #74ebd5, #ACB6E5);
     color: #fff;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: 100vh;
     overflow: hidden;
+    text-align: center;
 }
 
-.weather-container,
-.auth-container {
+.header {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
     background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    margin-left: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-link:hover {
+    color: #00bfff;
+    transform: scale(1.1);
+}
+
+.weather-container {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     width: 80%;
-    max-width: 1200px;
-    height: auto;
+    max-width: 600px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    backdrop-filter: blur(10px);
-    text-align: center;
+    align-items: center;
+    backdrop-filter: blur(15px);
+    margin-top: 50px;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 h1 {
-    font-size: 42px;
-    font-weight: 600;
+    font-size: 48px;
+    font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-form input {
-    padding: 15px;
-    font-size: 18px;
-    border: none;
-    border-radius: 10px;
-    width: 80%;
-    margin-bottom: 15px;
-    outline: none;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 30px;
     color: #fff;
 }
 
-form input:focus {
-    box-shadow: 0 0 8px rgba(0, 128, 255, 0.6);
+.form-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    width: 100%;
 }
 
-form button {
-    padding: 15px 25px;
+.form-container input {
+    padding: 18px;
     font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    width: 60%;
+    margin-right: 20px;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.form-container input:focus {
+    box-shadow: 0 0 15px rgba(0, 128, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.form-container button {
+    padding: 15px 30px;
+    font-size: 20px;
     cursor: pointer;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: all 0.3s ease;
-    width: 50%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-form button:hover {
+.form-container button:hover {
     background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.unit-selector {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #fff;
 }
 
 .weather-display {
@@ -86,19 +134,35 @@ form button:hover {
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     width: 100%;
     height: 70%;
-    margin-top: 20px;
-    overflow: auto;
+    margin-top: 30px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 .weather-display h2 {
-    font-size: 48px;
+    font-size: 60px;
     margin-bottom: 20px;
     font-weight: 700;
+    color: #fff;
+}
+#map-legend {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    background: rgb(34, 31, 31);
+    z-index: 1;
 }
 
 .weather-info {
@@ -112,8 +176,8 @@ form button:hover {
 }
 
 .weather-icon img {
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     animation: float 4s ease-in-out infinite;
 }
 
@@ -122,62 +186,55 @@ form button:hover {
         transform: translateY(0);
     }
     50% {
-        transform: translateY(-10px);
+        transform: translateY(-15px);
     }
 }
 
-#weather-details {
+.details-container {
     text-align: left;
     font-size: 20px;
     line-height: 1.8;
     flex: 1;
     max-width: 600px;
+    color: #fff;
 }
 
-#weather-details p {
-    margin: 10px 0;
+.details-container p {
+    margin: 15px 0;
 }
 
-#error-message {
+.error-message {
     color: #ff6347;
     margin-top: 20px;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .hidden {
     display: none;
 }
 
-/* Authentication-specific styles */
-.auth-container h1 {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 20px;
+/* Map Section */
+#radar-map {
+    width: 100%;
+    height: 400px; /* You can adjust this as per your design needs */
+    margin-top: 30px;
+    border-radius: 15px;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.footer {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 14px;
     color: #fff;
 }
 
-.auth-container p {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #ddd;
-}
-
-.auth-container p a {
-    color: #00bfff;
-    text-decoration: none;
-}
-
-.auth-container p a:hover {
-    text-decoration: underline;
-}
-
-/* Media Queries for Mobile */
 @media (max-width: 768px) {
-    .weather-container,
-    .auth-container {
+    .weather-container {
         padding: 20px;
-        width: 90%;
     }
 
     .weather-info {
@@ -185,7 +242,20 @@ form button:hover {
         align-items: center;
     }
 
-    #weather-details {
+    .details-container {
         text-align: center;
+    }
+
+    .form-container input {
+        width: 80%;
+        margin-right: 10px;
+    }
+
+    .form-container button {
+        width: 80%;
+    }
+
+    #radar-map {
+        height: 300px; /* Adjust map height for smaller screens */
     }
 }

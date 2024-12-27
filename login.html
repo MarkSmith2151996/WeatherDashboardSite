@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login - Weather Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="auth-container">
-        <h1>Welcome Back!</h1>
-        <form id="login-form">
-            <input type="email" id="login-email" placeholder="Email" required>
-            <input type="password" id="login-password" placeholder="Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-        <div id="login-error" class="hidden">Invalid credentials. Please try again.</div>
+        <div class="auth-box">
+            <h1 class="auth-title">Login</h1>
+            <form class="auth-form" action="login" method="POST">
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Login</button>
+            </form>
+            <p class="auth-text">Don't have an account? <a href="signup.html" class="auth-link">Sign Up</a></p>
+        </div>
     </div>
-    <script src="auth.js"></script>
 </body>
 </html>

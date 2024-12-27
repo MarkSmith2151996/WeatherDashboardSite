@@ -5,7 +5,115 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Custom styles for radar map */
+        #radar-map {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .layer-selector {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #layer-select {
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .weather-icon img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .details-container {
+            flex-grow: 1;
+        }
+
+        .weather-detail {
+            margin: 8px 0;
+            font-size: 1.2em;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        .weather-detail span {
+            font-weight: 600;
+            color: #555;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error-message {
+            color: #dc3545;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: rgba(220, 53, 69, 0.1);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .city-name {
+            font-size: 2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .unit-selector {
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -19,34 +127,52 @@
     </header>
 
     <div class="weather-container">
-        <h1 class="app-title">Check Your Weather</h1>
         <form id="weather-form" class="form-container">
             <input type="text" id="location" placeholder="Enter a city name" required>
             <button type="submit" class="btn-primary">Get Weather</button>
         </form>
-        
-        <div class="weather-display hidden">
-            <h2 id="city-name" class="city-name">New York</h2>
-            <div class="weather-info">
-                <div class="weather-icon">
-                    <img id="condition-icon" src="images/partly-cloudy.png" alt="Weather Condition Icon">
-                </div>
-                <div id="weather-details" class="details-container">
-                    <p id="temperature" class="weather-detail">Temperature: 22°C</p>
-                    <p id="humidity" class="weather-detail">Humidity: 75%</p>
-                    <p id="wind-speed" class="weather-detail">Wind Speed: 15 km/h</p>
-                    <p id="weather-description" class="weather-detail">Condition: Partly Cloudy</p>
-                </div>
-            </div>
+
+        <div class="unit-selector">
+            <label>
+                <input type="radio" name="unit" value="metric" checked> Celsius
+            </label>
+            <label>
+                <input type="radio" name="unit" value="imperial"> Fahrenheit
+            </label>
         </div>
 
-        <div id="error-message" class="error-message hidden">City not found. Please try again.</div>
+        <div class="layer-selector">
+            <label for="layer-select">Weather Layer:</label>
+            <select id="layer-select">
+                <!-- Options will be populated by JavaScript -->
+            </select>
+        </div>
+
+        <div class="weather-display hidden">
+            <h2 id="city-name" class="city-name"></h2>
+            <div class="weather-info">
+                <div class="weather-icon">
+                    <img id="condition-icon" src="" alt="Weather Condition">
+                </div>
+                <div id="weather-details" class="details-container">
+                    <p id="temperature" class="weather-detail"></p>
+                    <p id="humidity" class="weather-detail"></p>
+                    <p id="wind-speed" class="weather-detail"></p>
+                    <p id="weather-description" class="weather-detail"></p>
+                </div>
+            </div>
+            
+            <div id="radar-map"></div>
+        </div>
+
+        <div id="error-message" class="error-message hidden"></div>
     </div>
 
     <footer class="footer">
         <p>&copy; 2024 Weather Dashboard. All rights reserved.</p>
     </footer>
 
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
