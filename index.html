@@ -113,6 +113,19 @@
             gap: 10px;
             margin-bottom: 20px;
         }
+
+        /* Header adjustments for pointer-events */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            pointer-events: none; /* Allows elements behind it to be clickable */
+        }
+        .header .logo, .header .nav {
+            pointer-events: all; /* Restores pointer events for elements inside the header */
+        }
     </style>
 </head>
 <body>
@@ -126,7 +139,7 @@
         </nav>
     </header>
 
-    <div class="weather-container">
+    <div class="weather-container" style="margin-top: 60px;"> <!-- Adjusted margin to avoid overlap with fixed header -->
         <form id="weather-form" class="form-container">
             <input type="text" id="location" placeholder="Enter a city name" required>
             <button type="submit" class="btn-primary">Get Weather</button>
