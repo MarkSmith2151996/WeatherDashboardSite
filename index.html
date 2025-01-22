@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,6 +8,7 @@
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        /* Custom styles for radar map */
         #radar-map {
             width: 100%;
             height: 400px;
@@ -92,6 +93,39 @@
             margin-bottom: 20px;
             font-size: 1.1em;
         }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Header adjustments for pointer-events */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1;
+            pointer-events: none; /* Allows elements behind it to be clickable */
+        }
+        .header .logo, .header .nav {
+            pointer-events: all; /* Restores pointer events for elements inside the header */
+        }
     </style>
 </head>
 <body>
@@ -99,9 +133,13 @@
         <div class="logo">
             <h1 class="app-title">Weather Dashboard</h1>
         </div>
+        <nav class="nav">
+            <a href="login.html" class="nav-link">Login</a>
+            <a href="signup.html" class="nav-link">Sign Up</a>
+        </nav>
     </header>
 
-    <div class="weather-container">
+    <div class="weather-container" style="margin-top: 60px;"> <!-- Adjusted margin to avoid overlap with fixed header -->
         <form id="weather-form" class="form-container">
             <input type="text" id="location" placeholder="Enter a city name" required>
             <button type="submit" class="btn-primary">Get Weather</button>
@@ -123,7 +161,7 @@
             </select>
         </div>
 
-        <div class="weather-display">
+        <div class="weather-display hidden">
             <h2 id="city-name" class="city-name"></h2>
             <div class="weather-info">
                 <div class="weather-icon">
