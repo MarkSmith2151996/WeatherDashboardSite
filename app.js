@@ -1,10 +1,12 @@
 const weatherApiKey = "87dc683f0b5d42b08acb93abad79ac12";
 const mapboxToken = "pk.eyJ1IjoiY3J1c3RjcnVzYWRlciIsImEiOiJjbTU2OW9yOXYzZ2IzMmtwa3RneXlwcmQxIn0.M8al-KguxJD-V_zJiuPltA";
+const DEFAULT_CITY = "Washington, DC";
 
 let currentMapState = {
     center: [0, 0],
     zoom: 2
 };
+
 
 const form = document.querySelector("#weather-form");
 const input = document.querySelector("#location");
@@ -103,6 +105,13 @@ const weatherLayers = {
         ]
     }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    input.value = DEFAULT_CITY;
+    fetchWeatherData(DEFAULT_CITY, 'temp_new');
+    initializeLayerSelect();
+});
+
 
 function updateTemperatureLayer() {
     const unit = document.querySelector('input[name="unit"]:checked').value;
