@@ -106,13 +106,6 @@ const weatherLayers = {
     }
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    input.value = DEFAULT_CITY;
-    fetchWeatherData(DEFAULT_CITY, 'temp_new');
-    initializeLayerSelect();
-});
-
-
 function updateTemperatureLayer() {
     const unit = document.querySelector('input[name="unit"]:checked').value;
     if (unit === 'metric') {
